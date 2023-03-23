@@ -1,0 +1,32 @@
+const express = require('express');
+const { faker } = require('@faker-js/faker');
+const router = express.Router();
+
+router.get('/', (req, res) => {
+  const product = [];
+  const { size } = req.query;
+  const limit = size || 100;
+  for (let i = 0; i < limit; i++) {
+    product.push({
+      name: faker.commerce.productName(),
+      price: parseInt(faker.commerce.price()),
+      imagen: faker.image.imageUrl(),
+    });
+  }
+  res.json(product);
+});
+// endpoint estatico
+router.get('/filter', (req, res) => {
+  res.send('Yo soy un filter');
+});
+
+//endpoint dinamico
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  res.json({
+    id,
+    name: 'Product 2',
+    price: 2000,
+  });
+});
+module.exports = router;
