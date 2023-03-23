@@ -11,6 +11,7 @@
   "keywords": [],
   "author": "Victor Chirinos <victor-raul-22@hotmail.com>",
   "license": "MIT",
+
   "devDependencies": {
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
