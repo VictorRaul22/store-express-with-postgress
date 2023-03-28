@@ -3,10 +3,17 @@ services:
   postgres:
     image: postgres:13
     environment:
-      - POTGRESS_DB=my_store
-      - POSTGRES_USER=victor
-      - POSTGRES_PASSWORD=admin123
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - 5432:5432
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ~/docker_volumns/store_express_bd_data:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PG_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PG_PASSWORD}
+    ports:
+      - 5050:80
