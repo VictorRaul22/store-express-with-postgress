@@ -6,6 +6,7 @@ const {
   errorHandler,
   logErrors,
   boomErrorHandler,
+  ormErrorHandler,
 } = require('./middlewares/error.handler');
 
 const app = express();
@@ -38,4 +39,5 @@ routerApi(app);
 // los middleware se ejecutan el orden en el que se implementan
 app.use(logErrors);
 app.use(boomErrorHandler);
+app.use(ormErrorHandler);
 app.use(errorHandler);
