@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "migration:generate": "sequelize-cli migration:generate --name",
+    "migration:run": "sequelize-cli db:migrate",
+    "migration:revert": "sequelize-cli db:migrate:undo",
+    "migration:delete": "sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "Victor Chirinos <victor-raul-22@hotmail.com>",
@@ -16,7 +20,8 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.22",
-    "prettier": "^2.8.6"
+    "prettier": "^2.8.6",
+    "sequelize-cli": "^6.6.0"
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
@@ -25,6 +30,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.9.1",
+    "mysql2": "^3.2.0",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.30.0"
