@@ -1,59 +1,51 @@
-const { faker } = require('@faker-js/faker');
+// const { faker } = require('@faker-js/faker');
 const boon = require('@hapi/boom');
-const sequelize = require('../libs/sequelize');
+const { models } = require('../libs/sequelize');
 // const { models } = require('../libs/sequelize');
 
 class ProductsService {
   constructor() {
-    this.products = [];
-    this.generate();
+    // this.products = [];
+    // this.generate();
   }
-  generate() {
-    const limit = 100;
-    for (let i = 0; i < limit; i++) {
-      this.products.push({
-        id: faker.datatype.uuid(),
-        name: faker.commerce.productName(),
-        price: parseInt(faker.commerce.price()),
-        imagen: faker.image.imageUrl(),
-        isBlock: faker.datatype.boolean(),
-      });
-    }
-  }
+  // generate() {
+  //   const limit = 100;
+  //   for (let i = 0; i < limit; i++) {
+  //     this.products.push({
+  //       id: faker.datatype.uuid(),
+  //       name: faker.commerce.productName(),
+  //       price: parseInt(faker.commerce.price()),
+  //       imagen: faker.image.imageUrl(),
+  //       isBlock: faker.datatype.boolean(),
+  //     });
+  //   }
+  // }
   async create(data) {
-    const newProduct = {
-      id: faker.datatype.uuid(),
-      ...data,
-    };
-    this.products.push(newProduct);
+    const newProduct = await models.Product.create(data);
     return newProduct;
   }
   async find() {
-    const query = 'SELECT * FROM tasks';
-    const [data, metada] = await sequelize.query(query);
-
-    return data;
+    const products = await models.Product.findAll({
+      include: ['category'],
+    });
+    return products;
   }
   async findOne(id) {
-    const product = this.products.find((item) => item.id === id);
+    const product = await models.Product.findByPk(id);
     if (!product) throw boon.notFound('product not found');
-    if (product.isBlock) throw boon.conflict('product is block');
+    // if (product.isBlock) throw boon.conflict('product is block');
     return product;
   }
   async update(id, changes) {
-    const index = this.products.findIndex((item) => item.id === id);
-    if (index === -1) throw boon.notFound('product not found');
-    this.products[index] = {
-      ...this.products[index],
-      ...changes,
-    };
-    return this.products[index];
+    const product = await this.findOne(id);
+    const rta = product.update(changes);
+
+    return rta;
   }
 
   async delete(id) {
-    const index = this.products.findIndex((item) => item.id === id);
-    if (index === -1) throw boon.notFound('product not found');
-    this.products.splice(index, 1);
+    const product = await this.findOne(id);
+    await product.destroy();
     return {
       id,
     };
