@@ -20,10 +20,10 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.22",
-    "prettier": "^2.8.6",
-    "sequelize-cli": "^6.6.0"
+    "prettier": "^2.8.6"
   },
   "dependencies": {
+    "sequelize-cli": "^6.6.0",
     "@faker-js/faker": "^7.6.0",
     "@hapi/boom": "^10.0.1",
     "cors": "^2.8.5",
