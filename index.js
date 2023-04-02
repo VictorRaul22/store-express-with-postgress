@@ -26,6 +26,7 @@ const options = {
   },
 };
 app.use(cors(options));
+require('./utils/auth'); // se ejecuta el archivo auth/index.js
 
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
