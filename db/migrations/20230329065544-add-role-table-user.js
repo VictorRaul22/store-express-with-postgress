@@ -1,6 +1,6 @@
 'use strict';
 const { DataTypes } = require('sequelize');
-const { UserSchema, USER_TABLE } = require('../models/user.model');
+const { USER_TABLE } = require('../models/user.model');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -13,6 +13,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.removeColumn(USER_TABLE, 'role', UserSchema.role);
+    await queryInterface.removeColumn(USER_TABLE, 'role');
   },
 };
