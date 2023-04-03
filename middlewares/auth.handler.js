@@ -1,10 +1,10 @@
-const { config } = require('./../config/config');
+// const { config } = require('./../config/config');
 const boom = require('@hapi/boom');
-function checkApiKey(req, res, next) {
-  const apiKey = req.headers['api'];
-  if (apiKey !== config.apiKey) next(boom.unauthorized());
-  else next();
-}
+// function checkApiKey(req, res, next) {
+//   const apiKey = req.headers['api'];
+//   if (apiKey !== config.apiKey) next(boom.unauthorized());
+//   else next();
+// }
 function checkAdminRole(req, res, next) {
   const user = req.user;
   if (user.role === 'admin') {
@@ -23,4 +23,4 @@ function checkRoles(roles) {
     }
   };
 }
-module.exports = { checkApiKey, checkAdminRole, checkRoles };
+module.exports = { checkAdminRole, checkRoles };
