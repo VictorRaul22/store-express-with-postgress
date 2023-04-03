@@ -17,7 +17,7 @@ module.exports = {
         email: 'admin@domain.com',
         password: hash,
         role: 'admin',
-        created_at: new Date(),
+        create_at: new Date(),
       },
     ]);
   },
