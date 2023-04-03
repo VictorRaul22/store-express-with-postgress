@@ -11,15 +11,15 @@ module.exports = {
       allowNull: true,
       type: DataTypes.STRING,
     });
-    // const hash = await bcrypt.hash('123456', 10);
-    // await queryInterface.bulkInsert(USER_TABLE, [
-    //   {
-    //     email: 'admin@domain.com',
-    //     password: hash,
-    //     role: 'admin',
-    //     created_at: new Date(),
-    //   },
-    // ]);
+    const hash = await bcrypt.hash('123456', 10);
+    await queryInterface.bulkInsert(USER_TABLE, [
+      {
+        email: 'admin@domain.com',
+        password: hash,
+        role: 'admin',
+        created_at: new Date(),
+      },
+    ]);
   },
 
   async down(queryInterface) {
